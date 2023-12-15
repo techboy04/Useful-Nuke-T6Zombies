@@ -7,7 +7,7 @@
 init()
 {
     level thread onPlayerConnect();
-    create_dvar( "usefulnuke_points", 60 )
+    create_dvar( "usefulnuke_points", 60 );
 }
 
 onPlayerConnect()
