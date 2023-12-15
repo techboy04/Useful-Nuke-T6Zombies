@@ -7,6 +7,7 @@
 init()
 {
     level thread onPlayerConnect();
+    create_dvar( "usefulnuke_points", 60 )
 }
 
 onPlayerConnect()
@@ -49,4 +50,10 @@ calculateNuke()
         }
         wait 0.02;
     }
+}
+
+create_dvar( dvar, set )
+{
+    if( getDvar( dvar ) == "" )
+		setDvar( dvar, set );
 }
