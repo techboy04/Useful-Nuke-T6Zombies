@@ -26,17 +26,27 @@ onPlayerSpawned()
     {
         self waittill("spawned_player");
 		self iprintln("^4Useful Nuke mod ^7created by ^1techboy04gaming");
-		calculateNuke();
+		self thread calculateNuke();
     }
 }
 
 calculateNuke()
 {
-	self endon("disconnect");
+    self endon("disconnect");
     level endon("game_end");
     for(;;) {
-    	self waittill("nuke_triggered");
-    	maps/mp/zombies/_zm_score::player_add_points( "nuke_powerup", (get_round_enemy_array().size + level.zombie_total) * 60 );
+        self waittill("nuke_triggered");
+        points = ((get_round_enemy_array().size + level.zombie_total) * getDvarInt("usefulnuke_points"));
+        
+        if (level.zombie_vars[self.team]["zombie_point_scalar"] != 1)
+        {
+        	points = points * 2;
+        }
+        
+        for( i = 0; i < level.players.size; i++ )
+        {
+        	level.players[i].score += points;
+        }
         wait 0.02;
-	}
+    }
 }
